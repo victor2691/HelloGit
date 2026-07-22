@@ -1,2 +1,2 @@
-print("se actualiza el texto del print")
+print("NEW HELLO GIT")
 print("....")
