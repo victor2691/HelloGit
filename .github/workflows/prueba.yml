@@ -1,0 +1,17 @@
+name: prueba
+
+on: 
+ push:
+  branches: {main}
+jobs: 
+ build:
+ runs-on: ubunto-latest
+
+ steps: 
+ - uses: actions/checkout@v4.2.2
+ - uses: actions/setup-python@v4
+   with:
+          python-version: '3.12'
+  name: Prueba
+  run: 
+          
