@@ -25,6 +25,8 @@ jobs:
           python-version: '3.12'
 
       - name: Obtener y guardar tipo de cambio
+        env:
+          EXCHANGE_RATE_API_URL: ${{ secrets.EXCHANGE_RATE_API_URL }}
         run: python fetch_exchange_rate.py 
 
       - name: Commit and push changes

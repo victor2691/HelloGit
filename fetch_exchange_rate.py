@@ -3,11 +3,27 @@ import json
 import os
 from datetime import datetime
 
-# API pública y gratuita para obtener tipos de cambio
-URL = "https://open.er-api.com/v6/latest/USD"
+# Cargar variables de entorno desde .env si existe (entorno local)
+if os.path.exists(".env"):
+    try:
+        from dotenv import load_dotenv
+        load_dotenv()
+    except ImportError:
+        with open(".env", "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith("#") and "=" in line:
+                    key, val = line.split("=", 1)
+                    os.environ.setdefault(key.strip(), val.strip().strip("'\""))
+
+# Obtenemos la URL desde la variable de entorno (inyectada por .env o por GitHub Secret)
+URL = os.getenv("EXCHANGE_RATE_API_URL")
 JSON_FILE = "historial_tipo_cambio.json"
 
 def get_exchange_rate():
+    if not URL:
+        print("Error: No se encontró la variable de entorno 'EXCHANGE_RATE_API_URL'.")
+        return None
     try:
         # Hacemos la petición a la API
         req = urllib.request.urlopen(URL)
