@@ -1,17 +1,33 @@
 name: prueba
 
 on: 
- push:
-  branches: {main}
-jobs: 
- build:
- runs-on: ubunto-latest
+  push:
+    branches: [ main ]
 
- steps: 
- - uses: actions/checkout@v4.2.2
- - uses: actions/setup-python@v4
-   with:
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      # Da permiso al GITHUB_TOKEN para hacer commit y push al repositorio.
+      contents: write
+
+    steps: 
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
           python-version: '3.12'
-  name: Prueba
-  run: 
-          
+
+      - name: Obtener y guardar tipo de cambio
+        run: python fetch_exchange_rate.py 
+
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_user_name: 'Victor desde GIT ACTIONS'
+          commit_user_email: 'salgadovictor91@gmail.com'
+          commit_message: 'Actualizar historial de tipo de cambio USD-CRC'
+          commit_author: 'victor2691 <salgadovictor91@gmail.com>'
