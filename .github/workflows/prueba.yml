@@ -2,8 +2,8 @@ name: prueba
 
 on: 
   schedule:
-    # Se ejecuta automáticamente cada hora al minuto 37
-    - cron: '37 * * * *'
+    # Se ejecuta a las 12:19 UTC (6:19 AM hora local Costa Rica UTC-6)
+    - cron: '19 12 * * *'
   # Permite ejecutar el flujo manualmente desde la pestaña Actions de GitHub para pruebas
   workflow_dispatch:
 
