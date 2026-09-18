@@ -48,5 +48,10 @@
         "fecha": "2026-09-17 17:00:16",
         "moneda": "USD a CRC",
         "tipo_cambio": 447.716964
+    },
+    {
+        "fecha": "2026-09-18 16:24:49",
+        "moneda": "USD a CRC",
+        "tipo_cambio": 448.501037
     }
 ]
